@@ -1,4 +1,5 @@
 from elasticsearch import Elasticsearch
+from bot import Bot
 
 # Connect to Elastic search
 esclient = Elasticsearch(["localhost:9200"])
@@ -23,3 +24,7 @@ esclient = Elasticsearch(["localhost:9200"])
 #         }
 #     }
 # )
+
+# Prompt example
+b = Bot()
+b.prompt_user("TEST")

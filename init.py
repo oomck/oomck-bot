@@ -27,4 +27,5 @@ esclient = Elasticsearch(["localhost:9200"])
 
 # Prompt example
 b = Bot()
-b.prompt_user("TEST")
+input = b.prompt_user("TEST")
+print(b.process_input(input))

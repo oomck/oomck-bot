@@ -1,9 +1,13 @@
+import re
+
+
 class Bot:
     # Prompt user and split string into list of words
     def prompt_user(self, prompt):
-        test = input(prompt + "\n").split("/[^A-Za-z]/g")
-        self.process_input(test)
+        return input(prompt + "\n")
 
     # Process string list input
     def process_input(self, input):
-        print(input)
+        # Split by spaces/symbols and remove empty strings
+        result = list(filter(None, re.split("[^A-Za-z]", input)))
+        return result

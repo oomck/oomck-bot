@@ -7,5 +7,5 @@ if [ ! "$(docker ps -q -f name=oomck-elasticsearch)" ]; then
         docker rm oomck-elasticsearch
     fi
     # run your container
-    docker run -d --name oomck-elasticsearch -p 9300:9300 -p 9200:9200 elasticsearch:7.6.2
+    docker run -d --name oomck-elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.6.2
 fi

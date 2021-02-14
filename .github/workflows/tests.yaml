@@ -27,7 +27,7 @@ jobs:
       - name: Transition to In Review
         uses: atlassian/gajira-transition@master
         with:
-          issue: ${{ steps.create.outputs.issue }}
+          issue: OOMCKBOT-18
           transition: "In review"
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -55,5 +55,5 @@ jobs:
       - name: Transition to In Review
         uses: atlassian/gajira-transition@master
         with:
-          issue: ${{ steps.create.outputs.issue }}
+          issue: OOMCKBOT-18
           transition: "In review"

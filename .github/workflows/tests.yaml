@@ -29,7 +29,7 @@ jobs:
         uses: atlassian/gajira-transition@master
         with:
           issue: ${{ steps.key-extractor.outputs.issue }}
-          transition: "In review"
+          transition: "Pending Tests"
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2

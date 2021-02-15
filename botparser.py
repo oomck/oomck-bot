@@ -52,10 +52,12 @@ class BotParser:
             if not has_key_word:
                 # mark word as key word
                 keyword = user_input
+                if keywords_dict.get(keyword) is None:
+                    keywords_dict[keyword] = []
                 has_key_word = True
             else:
                 # insert word into keyword dictionary
-                keywords_dict[keyword] = user_input
+                keywords_dict[keyword].append(user_input)
                 has_key_word = False
         user_input_list.pop(0)
         return self._parse_input(user_input_list, keywords_dict, has_key_word, keyword)

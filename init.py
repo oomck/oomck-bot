@@ -3,11 +3,13 @@ from bot import Bot
 import sys
 import os
 
-# Download data
-data_repo = "https://github.com/google-research-datasets/ccpe"
+kaggle_src = "rtatman/ubuntu-dialogue-corpus"
 
-if not os.path.isdir("./ccpe"):
-    os.system("git clone " + data_repo)
+# Download and unpack
+if not os.path.isdir("./data/Ubuntu-dialogue-corpus"):
+    os.system("kaggle d download " + kaggle_src + " -p ./data")
+    os.system("unzip -q ./data/ubuntu-dialogue-corpus.zip -d ./data")
+    os.system("rm ./data/ubuntu-dialogue-corpus.zip")
 
 
 # Connect to Elastic search
@@ -35,6 +37,6 @@ esclient = Elasticsearch(["localhost:9200"])
 # )
 
 # Prompt example
-b = Bot()
-input = b.prompt_user("TEST")
-print(b.process_input(input))
+# b = Bot()
+# input = b.prompt_user("TEST")
+# print(b.process_input(input))

@@ -4,5 +4,6 @@
 tmp/
 venv
 data/
+*/data.json
 
 __pycache__

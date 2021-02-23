@@ -9,9 +9,11 @@ from utils.process import filter_data
 
 kaggle_src = "rtatman/ubuntu-dialogue-corpus"
 
+os.chdir(os.path.abspath(os.path.dirname(__file__)))
+
 # IPMORT DATA
 
-if not os.path.isdir("./data/Ubuntu-dialogue-corpus"):
+if not os.path.isdir("data/Ubuntu-dialogue-corpus"):
     os.system("kaggle d download " + kaggle_src + " -p ./data")
     os.system("unzip -q ./data/ubuntu-dialogue-corpus.zip -d ./data")
     os.system("rm ./data/ubuntu-dialogue-corpus.zip")

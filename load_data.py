@@ -35,5 +35,6 @@ def delete_data():
 
 # Main method that utilizes the above methods to insert the data, and search for a specific instance in ElasticSearch.
 if __name__ == "__main__":
+    delete_data()
     ubuntu_data = load_json_data()
     insert_data_by_bulk(ubuntu_data)

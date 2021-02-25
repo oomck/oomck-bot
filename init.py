@@ -47,6 +47,3 @@ def ensure_elastic():
     else:
         print("Timed out, please try again")
         sys.exit()
-
-
-client = ensure_elastic()

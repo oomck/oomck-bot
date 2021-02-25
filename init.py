@@ -3,6 +3,7 @@ from bot import Bot
 import sys
 import os
 import docker
+import time
 
 
 def ensure_elastic():
@@ -34,36 +35,18 @@ def ensure_elastic():
         )
 
     # Wait for Elastic Search to be ready
-    # client = Elasticsearch(["localhost:9200"])
-    # for _ in range(10000):
-    #     try:
-    #         client.cluster.health(wait_for_status="yellow")
-    #         return client
-    #     except ConnectionError:
-    #         time.sleep(0.1)
-    # else:
-    #     print("Elastic Search Failed to start")
-    #     sys.exit()
+    es_client = Elasticsearch(["localhost:9200"])
+    print("Opened connection")
+    print("Waiting for elastic search nodes to start up...")
+    for _ in range(1000):
+        try:
+            es_client.cluster.health()
+            return es_client
+        except Exception:
+            time.sleep(0.1)
+    else:
+        print("Timed out, please try again")
+        sys.exit()
 
 
-ensure_elastic()
-
-client = Elasticsearch(["localhost:9200"])
-
-# EXAMPLE QUERY
-
-response = client.search(
-    index="social-*",
-    body={
-        "query": {"match": {"message": "myProduct"}},
-        "aggs": {"top_10_states": {"terms": {"field": "state", "size": 10}}},
-    },
-)
-
-print(response)
-
-
-# Prompt example
-# b = Bot()
-# input = b.prompt_user("TEST")
-# print(b.process_input(input))
+client = ensure_elastic()

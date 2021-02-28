@@ -6,7 +6,7 @@ from elasticsearch import Elasticsearch, helpers
 from elasticsearch.helpers import BulkIndexError
 
 
-es = Elasticsearch()
+es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 json_data = "data/data.json"

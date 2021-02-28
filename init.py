@@ -1,5 +1,4 @@
 from elasticsearch import Elasticsearch
-from bot import Bot
 import sys
 import os
 import docker

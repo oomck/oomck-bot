@@ -1,10 +1,10 @@
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch()
+es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 index = "ubuntu-data"
-sample_id = "Rwv90XcBgkIEUIpKU2XM"
+sample_id = "rK0n53cBZJQfn0YibBgi"
 
 
 # Method for searching for a record in ElasticSearch with the index and id.

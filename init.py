@@ -27,6 +27,15 @@ def ensure_elastic():
             ports={"9200": "9200", "9300": "9300"},
             environment=["discovery.type=single-node"],
             detach=True,
+            volume_driver="local",
+            volumes={
+                os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)), "data/es_vol"
+                ): {
+                    "bind": "/usr/share/elasticsearch/data",
+                    "mode": "rw",
+                }
+            },
         )
         print("elasticsearch launched")
     except docker.errors.APIError:

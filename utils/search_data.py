@@ -4,7 +4,7 @@ es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 index = "ubuntu-data"
-sample_id = "Sample ID"
+sample_id = "Insert Sample ID"
 
 
 # Method for searching for a record in ElasticSearch with the index and id.

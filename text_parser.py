@@ -2,11 +2,12 @@ from autocorrect import Speller
 import string
 
 
-class BotParser:
+class Parser:
 
     def __init__(self):
         with open('stop.txt') as input_file:
             self.stop_list = long_list = [line.strip() for line in input_file]
+        self.spell = Speller()
 
     def _tokenize(self, user_input):
         return user_input.split()
@@ -30,34 +31,24 @@ class BotParser:
         return False
 
     def _spell_check(self, word):
-        spell = Speller()
-        return spell(word)
+        return self.spell(word)
 
     def parse(self, user_input):
-        keywords_dict = {}
-        # get list of user input
+        parsed_input = []
+        # tokenize and normalize to get list of user input
         user_input_list = self._tokenize(self._normalize(user_input))
-        # recursively get dictionary
-        return self._parse_input(user_input_list, keywords_dict, False, "")
+        # recursively get parsed input
+        return self._parse_input(user_input_list, parsed_input)
 
-    def _parse_input(self, user_input_list, keywords_dict, has_key_word, keyword):
+    def _parse_input(self, user_input_list, parsed_input):
         try:
             user_input = user_input_list[0]
         except IndexError:
-            return keywords_dict
+            return parsed_input
         # eliminate punctuation and spell check word
         user_input = self._spell_check(self._remove_punctuation(user_input))
         # check if word is unneeded, if it is continue to next word
         if not self._stop_filter(user_input):
-            if not has_key_word:
-                # mark word as key word
-                keyword = user_input
-                if keywords_dict.get(keyword) is None:
-                    keywords_dict[keyword] = []
-                has_key_word = True
-            else:
-                # insert word into keyword dictionary
-                keywords_dict[keyword].append(user_input)
-                has_key_word = False
+            parsed_input.append(user_input)
         user_input_list.pop(0)
-        return self._parse_input(user_input_list, keywords_dict, has_key_word, keyword)
+        return self._parse_input(user_input_list, parsed_input)

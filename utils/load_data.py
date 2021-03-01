@@ -5,8 +5,9 @@ import json
 from elasticsearch import Elasticsearch, helpers
 from elasticsearch.helpers import BulkIndexError
 
-
-es = Elasticsearch()
+# The load data script that was utilized in order to setup the Docker volume.
+# No longer needed as the process takes too long to run every time. Hence, why we persisted the volume instead.
+es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 json_data = "data/data.json"

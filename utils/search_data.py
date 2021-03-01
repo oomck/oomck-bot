@@ -1,10 +1,11 @@
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch()
+# Example class that is used in order to showcase how a simple search can be used to retrieve data from ElasticSearch
+es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 index = "ubuntu-data"
-sample_id = "Rwv90XcBgkIEUIpKU2XM"
+sample_id = "Insert Sample ID"
 
 
 # Method for searching for a record in ElasticSearch with the index and id.

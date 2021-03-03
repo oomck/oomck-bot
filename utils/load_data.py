@@ -5,13 +5,12 @@ import json
 from elasticsearch import Elasticsearch, helpers
 from elasticsearch.helpers import BulkIndexError
 
-# The load data script that was utilized in order to setup the Docker volume.
-# No longer needed as the process takes too long to run every time. Hence, why we persisted the volume instead.
+# The load data script that is utilized in order to setup the Docker volume.
 es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
 json_data = "data/data.json"
-index = "ubuntu-data"
+index = "fast_and_furious"
 
 
 # Method to load the data from JSON file.
@@ -39,5 +38,5 @@ def delete_data():
 # Main method that utilizes the above methods to insert the data, and search for a specific instance in ElasticSearch.
 if __name__ == "__main__":
     # delete_data()
-    ubuntu_data = load_json_data()
-    insert_data_by_bulk(ubuntu_data)
+    fast_and_furious = load_json_data()
+    insert_data_by_bulk(fast_and_furious)

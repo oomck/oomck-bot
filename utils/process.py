@@ -1,42 +1,34 @@
-def filter_data(itr):
+import json
+import os
+import pandas
+
+
+def filter_data(data):
     # CONVERT TO PROMPT/RESPONSE FORMAT
     convo_list = []
-    cur_id = ""
-    cur_speaker = ""
-    prompt = ""
-    response = ""
-    speaking = 0
 
-    for i, row in itr:
-        # Initialize first convo
-        if i == 0:
-            cur_id = row["dialogueID"]
-            cur_speaker = row["from"]
-
-        if cur_id == row["dialogueID"]:
-            if not cur_speaker == row["from"]:
-                # If currently gathering sender text, switch
-                if speaking == 0:
-                    speaking = 1
-                    response = str(row["text"]) + " "
-                    cur_speaker = row["from"]
-                # If currently gathering responders text, push to convo list and swap
-                else:
-                    cur_speaker = row["from"]
-                    convo_list.append({"prompt": prompt, "response": response})
-                    prompt = response
-                    response = str(row["text"]) + " "
-            elif speaking == 0:
-                prompt += str(row["text"]) + " "
-            else:
-                response += str(row["text"]) + " "
-        else:
-            if not response == "":
-                convo_list.append({"prompt": prompt, "response": response})
-            speaking = 0
-            cur_id = row["dialogueID"]
-            cur_speaker = row["from"]
-            prompt = str(row["text"]) + " "
-            response = ""
+    for row in data.iterrows():
+        for i in range(1, 10):
+            prompt = row[1]["Answer.sentence" + str(i)]
+            response = row[1]["Answer.sentence" + str(i + 1)]
+            convo_list.append({"prompt": prompt, "response": response})
 
     return convo_list
+
+
+if __name__ == "__main__":
+    print("File loaded")
+    basepath = os.path.abspath(os.path.dirname(__file__))
+    filepath = os.path.join(
+        basepath,
+        "../data/Batch_2840986_batch_results.csv",
+    )
+    data_csv = pandas.read_csv(filepath)
+
+    print("Processing data")
+    data = filter_data(data_csv)
+
+    file = open(os.path.join(basepath, "../data/data.json"), "w")
+    file.write(json.dumps(data, indent=2))
+    file.close()
+    print("File written to data/data.json")

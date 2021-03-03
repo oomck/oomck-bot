@@ -3,3 +3,4 @@ regex
 docker
 gdown
 autocorrect
+pandas

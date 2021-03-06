@@ -3,6 +3,11 @@ from text_parser import Parser
 from bot import Bot
 
 client = init.ensure_elastic()
-# parser = Parser()
-#
-# print(parser.parse("Hello sir, how can I use for loop in bash script?"))
+parser = Parser()
+bot = Bot(parser, client)
+
+while True:
+    user_input = bot.get_input()
+    if user_input == "kill program":
+        break
+    bot.get_answer(user_input)

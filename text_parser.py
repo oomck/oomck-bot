@@ -38,7 +38,7 @@ class Parser:
         # tokenize and normalize to get list of user input
         user_input_list = self._tokenize(self._normalize(user_input))
         # recursively get parsed input
-        return self._parse_input(user_input_list, parsed_input)
+        return " ".join(self._parse_input(user_input_list, parsed_input))
 
     def _parse_input(self, user_input_list, parsed_input):
         try:

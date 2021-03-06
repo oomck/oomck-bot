@@ -9,7 +9,7 @@ from elasticsearch.helpers import BulkIndexError
 es = Elasticsearch(["localhost:9200"], timeout=30, retry_on_timeout=True)
 
 # Constants
-json_data = "data/data.json"
+json_data = "../data/data.json"
 index = "fast_and_furious"
 
 

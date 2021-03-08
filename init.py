@@ -22,8 +22,6 @@ def ensure_elastic():
         else:
             print("elasticsearch already running")
     except docker.errors.NotFound:
-        # Download and setup data
-        setup_data()
         # Create and launch Container
         client.containers.run(
             image="elasticsearch:7.6.2",
@@ -31,15 +29,15 @@ def ensure_elastic():
             ports={"9200": "9200", "9300": "9300"},
             environment=["discovery.type=single-node"],
             detach=True,
-            volume_driver="local",
-            volumes={
-                os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)), "data/es_vol"
-                ): {
-                    "bind": "/usr/share/elasticsearch/data",
-                    "mode": "rw",
-                }
-            },
+            # volume_driver="local",
+            # volumes={
+            #     os.path.join(
+            #         os.path.dirname(os.path.abspath(__file__)), "data/es_vol"
+            #     ): {
+            #         "bind": "/usr/share/elasticsearch/data",
+            #         "mode": "rw",
+            #     }
+            # },
         )
         print("elasticsearch launched")
     except docker.errors.APIError:
@@ -61,23 +59,22 @@ def ensure_elastic():
         print("Timed out, please try again")
         sys.exit()
 
-
-def setup_data():
-    url = "https://drive.google.com/uc?id=1cypZd534vcbn4OL9vMNYwpssSLF9_IZC"
-    basepath = os.path.dirname(os.path.abspath(__file__))
-    download_output = os.path.join(basepath, "data/es_vol.zip")
-    zip_output = os.path.join(basepath, "data")
-
-    # Download Zip from GDrive if it doesn't already exist
-    if not os.path.exists(download_output):
-        gdown.download(url, download_output, quiet=False)
-
-    # Unzip download to data/es_vol
-    # (Run on new container creation even if the folder already exists)
-    print("Unzipping...")
-    # Remove folder if already exists
-    if os.path.isdir(os.path.join(zip_output, "es_vol")):
-        shutil.rmtree(os.path.join(zip_output, "es_vol"))
-    # Extract
-    with ZipFile(download_output, "r") as zip:
-        zip.extractall(zip_output)
+# def setup_data():
+#     url = "https://drive.google.com/uc?id=1cypZd534vcbn4OL9vMNYwpssSLF9_IZC"
+#     basepath = os.path.dirname(os.path.abspath(__file__))
+#     download_output = os.path.join(basepath, "data/es_vol.zip")
+#     zip_output = os.path.join(basepath, "data")
+#
+#     # Download Zip from GDrive if it doesn't already exist
+#     if not os.path.exists(download_output):
+#         gdown.download(url, download_output, quiet=False)
+#
+#     # Unzip download to data/es_vol
+#     # (Run on new container creation even if the folder already exists)
+#     print("Unzipping...")
+#     # Remove folder if already exists
+#     if os.path.isdir(os.path.join(zip_output, "es_vol")):
+#         shutil.rmtree(os.path.join(zip_output, "es_vol"))
+#     # Extract
+#     with ZipFile(download_output, "r") as zip:
+#         zip.extractall(zip_output)

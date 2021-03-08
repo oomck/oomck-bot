@@ -19,13 +19,9 @@ class Cleaner:
         query = Cleaner.fix_contractions(query)
         query = Cleaner.remove_punctuation(query)
 
-        print("cleaner: ", query)
-
         tokens = Cleaner.tokenizer.tokenize(query)
         tokens = Cleaner.spell_check(tokens)
         tokens = Cleaner.remove_stop_words(tokens)
-
-        print("cleaner:", tokens)
 
         return " ".join(tokens)
 

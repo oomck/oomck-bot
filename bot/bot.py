@@ -17,7 +17,6 @@ class Bot:
         :return: Bots response as string
         """
         query = self.cleaner.clean(raw_input_string)
-        print("query: ", query)
         results = self.es.search(query)
 
         if len(results) > 0:

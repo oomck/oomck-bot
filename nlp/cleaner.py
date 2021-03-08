@@ -1,46 +1,70 @@
+import string
+
+import settings
+from nlp.tokenizer import Tokenizer
+from autocorrect import Speller
+
+
 class Cleaner:
     """
     A cleaner class that cleans a string to computer readable level
     """
 
-    @staticmethod
-    def clean(string):
-        string = Cleaner.to_lower(string)
-        string = Cleaner.fix_contractions(string)
-        string = Cleaner.remove_punctuation(string)
-        string = Cleaner.remove_stop_words(string)
-        return string
+    tokenizer = Tokenizer()
+    speller = Speller()
 
     @staticmethod
-    def to_lower(string):
+    def clean(query):
+        query = Cleaner.to_lower(query)
+        query = Cleaner.fix_contractions(query)
+        query = Cleaner.remove_punctuation(query)
+
+        print("cleaner: ", query)
+
+        tokens = Cleaner.tokenizer.tokenize(query)
+        tokens = Cleaner.spell_check(tokens)
+        tokens = Cleaner.remove_stop_words(tokens)
+
+        print("cleaner:", tokens)
+
+        return " ".join(tokens)
+
+    @staticmethod
+    def spell_check(tokens):
+        return [Cleaner.speller(x) for x in tokens]
+
+    @staticmethod
+    def to_lower(query):
         """
-        :param string:
+        :param query:
         :return: convert all the letters to lower case
         """
-        return string.lower()
+        return query.lower()
 
     @staticmethod
-    def fix_contractions(string):
+    def fix_contractions(query):
         """
-        :param string:
+        :param query:
         :return: fix all the contraction in a string
         """
-        raise NotImplementedError()
+        return query
 
     @staticmethod
-    def remove_punctuation(string):
+    def remove_punctuation(query):
         """
-        :param string:
+        :param query:
         :return: remove all the punctuations from a string
         """
-        raise NotImplementedError()
+        for punctuation in string.punctuation:
+            query = query.replace(punctuation, " ")
+        return query
 
     @staticmethod
-    def remove_stop_words(string):
+    def remove_stop_words(tokens):
         """
-        :param string:
+        :param tokens:
         :return: remove all the stop words from a sentence
         """
-        raise NotImplementedError()
-
-    # TODO: add extra methods
+        with open(settings.STOP_WORDS_URL) as input_file:
+            stops = [line.strip() for line in input_file]
+            return [x for x in tokens if x not in stops]

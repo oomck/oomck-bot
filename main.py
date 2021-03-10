@@ -1,13 +1,15 @@
-import init
-from text_parser import Parser
 from bot import Bot
+from es.data_loader import DataLoader
 
-client = init.ensure_elastic()
-parser = Parser()
-bot = Bot(parser, client)
+bot = Bot()
+data_loader = DataLoader()
 
 while True:
-    user_input = bot.get_input()
-    if user_input == "kill program":
+    user_input = input("[YOU] ")
+    if user_input == "exit":
         break
-    bot.get_answer(user_input)
+    if user_input == "load_data":
+        data_loader.load_data()
+
+    print("[BOT] " + bot.ask(user_input))
+

@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch, helpers
+from elasticsearch import Elasticsearch, helpers, exceptions
 
 import settings
 
@@ -30,7 +30,11 @@ class _ElasticSearch:
         helpers.bulk(self.es, data, index=settings.ES_INDEX_NAME)
 
     def clear_data(self):
-        self.es.indices.delete(settings.ES_INDEX_NAME)
+        try:
+            self.es.indices.delete(settings.ES_INDEX_NAME)
+        except exceptions.NotFoundError:
+            print('No need to clear data. This must be your first time running this project!')
+
 
     def search(self, query):
         """

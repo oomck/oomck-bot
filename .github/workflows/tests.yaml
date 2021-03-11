@@ -29,7 +29,7 @@ jobs:
         id: key-extractor
         uses: atlassian/gajira-find-issue-key@master
         with:
-          from: branch
+          from: commits
 
       - name: Transition to Pending Tests
         uses: atlassian/gajira-transition@master

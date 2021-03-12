@@ -1,4 +1,4 @@
-Oomck-Bot Sample Output
+## Oomck-Bot Sample Output
 
 Welcome to Oomck-Bot! Please type your message below:
 Waiting on you...

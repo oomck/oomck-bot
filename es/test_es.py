@@ -1,6 +1,6 @@
 import unittest
 
 
-class BotTest(unittest.TestCase):
+class TestES(unittest.TestCase):
     pass
     # TODO: add tests

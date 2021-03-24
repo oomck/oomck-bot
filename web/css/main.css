@@ -1,0 +1,129 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.info-container {
+  width: 60vw;
+  min-width: 500px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.info-container .text {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.info-container .text h1 {
+  margin: 0;
+}
+
+.info-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  object-fit: cover;
+  float: left;
+}
+
+.chat-container {
+  width: 60vw;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 50vh;
+  background: #f1f1f1;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.chat-container .message {
+  position: relative;
+  padding: 10px;
+  margin: 10px;
+  max-width: 80%;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.chat-container .bot-message {
+  align-self: left;
+  margin-right: auto;
+  background-color: #a5a5a5;
+}
+
+.chat-container .user-message {
+  align-self: right;
+  background-color: #71a9f7;
+  margin-left: auto;
+  color: white;
+}
+
+.bot-message::before {
+  content: "OOMCK";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 8px;
+  transform: translateY(-100%);
+}
+
+.user-message::before {
+  content: "YOU";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 8px;
+  color: black;
+  transform: translateY(-100%);
+}
+
+.input-container {
+  width: 60vw;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.input-container input {
+  width: auto;
+  background: #f1f1f1;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.input-container button {
+  background: #6b5ca5;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  color: white;
+}
+
+#load-data {
+  background: #6b5ca5;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  font-size: 14px;
+  color: white;
+}

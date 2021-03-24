@@ -15,3 +15,6 @@
 1. Type "load_data" to the bot to load the data into elastic search.
 1. Type "exit" to end the chat with the bot.
 1. Enjoy!
+
+### Test
+1. run `python -m unittest` to run all the tests

@@ -5,3 +5,4 @@ gdown
 autocorrect
 pandas
 eel
+nltk

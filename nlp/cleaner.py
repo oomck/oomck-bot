@@ -5,6 +5,7 @@ from nlp.tokenizer import Tokenizer
 from autocorrect import Speller
 
 
+# TODO: use nltk
 class Cleaner:
     """
     A cleaner class that cleans a string to computer readable level

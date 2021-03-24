@@ -1,4 +1,3 @@
-const loadButton = document.getElementById("load-data");
 const input = document.getElementById("user-input");
 const chatContainer = document.getElementById("chat");
 const sendButton = document.getElementById("send");
@@ -27,8 +26,4 @@ sendButton.onclick = () => {
     eel.query_bot(input.value);
     input.value = "";
   }
-};
-
-loadButton.onclick = () => {
-  eel.load_data();
 };

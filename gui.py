@@ -3,6 +3,15 @@ import random
 from datetime import datetime
 
 
-if __name__ == "__main__":
-    eel.init("web")
-    eel.start("index.html")
+eel.init("web")
+
+@eel.expose
+def query_bot(text):
+    print(text)
+    eel.send_bot_response("test")
+
+@eel.expose
+def load_data():
+    print("load Data")
+
+eel.start("index.html")

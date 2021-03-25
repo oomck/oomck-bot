@@ -7,6 +7,9 @@ from bot import Bot
 from es.data_loader import DataLoader
 import eel
 import socket
+import nltk
+
+nltk.download("punkt")
 
 bot = Bot()
 data_loader = DataLoader()

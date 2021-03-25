@@ -18,3 +18,17 @@
 
 ### Test
 1. run `python -m unittest` to run all the tests
+
+### Assignment 3 - Features
+1. GUI:
+    - We implemented a GUI to improve the overall experience for our users.
+2. POS Tagging:
+    - We implemented POS tagging to assign labels to tokens in the user's input. This helps improve the quality of the bot's responses.
+3. Named Entity Recognition: 
+    - We implemented this in our bot to help distinguish key elements within the user's input. This will help determine names of the characters and movies to improve the bot's understanding of message sent by the user.
+4. Coreference Resolution: 
+   - This was implemented to help improve the bot's overall understanding of the message sent by the user. It finds all the expressions that refer to the same entities that the earlier NLP methods helped to distinguish.
+5. Automated Unit Testing: 
+   - Unit tests were implemented to ensure that the quality of our code is maintained throughout the development process. This ensures that our bot behaves as expected at all times.
+6. Handle Spelling Errors: 
+   - This was implemented to ensure that there are no spelling mistakes in the user's input that could affect the quality of the response returned by the bot.

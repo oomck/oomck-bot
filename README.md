@@ -32,3 +32,11 @@
    - Unit tests were implemented to ensure that the quality of our code is maintained throughout the development process. This ensures that our bot behaves as expected at all times.
 6. Handle Spelling Errors: 
    - This was implemented to ensure that there are no spelling mistakes in the user's input that could affect the quality of the response returned by the bot.
+
+### Features of OOMCK-Bot for an API
+The following features of our bot could be put in an API for others to use.
+1. Easy connection with another bot through sockets.
+2. Tokenizing user input with NLTK.
+3. Processing and loading of data from a JSON file into an Elastic Search instance.
+4. Answer questions regarding the Fast and Furious franchise.
+5. The basic structure of our chat-bot allows it to be used with a variety of datasets according to a developer's specific needs.

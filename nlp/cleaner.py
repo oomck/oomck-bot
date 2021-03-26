@@ -2,6 +2,7 @@ import string
 
 import settings
 from nlp.tokenizer import Tokenizer
+from nlp.pos_tagger import POSTagger
 from autocorrect import Speller
 
 
@@ -13,6 +14,7 @@ class Cleaner:
 
     tokenizer = Tokenizer()
     speller = Speller()
+    pos_tagger = POSTagger()
 
     @staticmethod
     def clean(query):
@@ -23,6 +25,9 @@ class Cleaner:
         tokens = Cleaner.tokenizer.tokenize(query)
         tokens = Cleaner.spell_check(tokens)
         tokens = Cleaner.remove_stop_words(tokens)
+
+        tags = Cleaner.pos_tagger.tag(tokens)
+        print(tags)
 
         return " ".join(tokens)
 

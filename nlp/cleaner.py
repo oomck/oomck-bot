@@ -3,6 +3,7 @@ import string
 import settings
 from nlp.tokenizer import Tokenizer
 from nlp.pos_tagger import POSTagger
+from nlp.synonyms import Synonyms
 from autocorrect import Speller
 
 
@@ -15,6 +16,7 @@ class Cleaner:
     tokenizer = Tokenizer()
     speller = Speller()
     pos_tagger = POSTagger()
+    synonyms = Synonyms()
 
     @staticmethod
     def clean(query):
@@ -28,6 +30,9 @@ class Cleaner:
 
         tags = Cleaner.pos_tagger.tag(tokens)
         print(tags)
+
+        synonyms = Cleaner.combine_synonyms(tokens)
+        print(synonyms)
 
         return " ".join(tokens)
 
@@ -70,3 +75,14 @@ class Cleaner:
         with open(settings.STOP_WORDS_URL) as input_file:
             stops = [line.strip() for line in input_file]
             return [x for x in tokens if x not in stops]
+
+    @staticmethod
+    def combine_synonyms(tokens):
+        """
+        :param tokens:
+        :return: a list of synonyms associated with each token
+        """
+        combined_synonyms = {}
+        for word in tokens:
+            combined_synonyms[word] = Cleaner.synonyms.measure(word)
+        return combined_synonyms

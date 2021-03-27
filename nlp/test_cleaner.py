@@ -27,3 +27,15 @@ class TestCleaner(unittest.TestCase):
             Cleaner.clean("Hello, My name is Mike OXLONG!"),
             "hello name mike oblong",
         )
+
+    def test_combine_synonyms(self):
+        synonyms = Cleaner.combine_synonyms(['active', 'dead'])
+        self.assertCountEqual(
+            synonyms['active'],
+            ['dynamic', 'fighting', 'combat-ready', 'active_voice', 'active_agent', 'participating', 'alive', 'active']
+        )
+        self.assertCountEqual(
+            synonyms['dead'],
+            ['dead', 'all_in', 'beat', 'bushed', 'numb', 'deadened', 'idle', 'stagnant', 'utter', 'drained', 'abruptly',
+             'suddenly', 'short', 'absolutely', 'perfectly', 'utterly']
+        )

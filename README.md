@@ -29,14 +29,16 @@
     - We implemented a GUI to improve the overall experience for our users.
 2. POS Tagging:
     - We implemented POS tagging to assign labels to tokens in the user's input. This helps improve the quality of the bot's responses.
-3. Named Entity Recognition: 
-    - We implemented this in our bot to help distinguish key elements within the user's input. This will help determine names of the characters and movies to improve the bot's understanding of message sent by the user.
+3. Synonym Recognition:
+    - We implemented this in our bot to recognize synonyms within the user's input. This improves the bot's understanding of message sent by the user.
 4. Interaction with Another Bot via Sockets 
    - We connected our bot with another group's chatbot through sockets in order to allow communication between the two bots.
 5. Automated Unit Testing: 
    - Unit tests were implemented to ensure that the quality of our code is maintained throughout the development process. This ensures that our bot behaves as expected at all times.
 6. Handle Spelling Errors: 
    - This was implemented to ensure that there are no spelling mistakes in the user's input that could affect the quality of the response returned by the bot.
+7. Extra Default Responses:
+    - To keep conversation going, there are now more, and on topic, default responses. This keeps the conversation going even when the user is confusing the bot.
 
 ### Features of OOMCK-Bot for an API
 The following features of our bot could be put in an API for others to use.

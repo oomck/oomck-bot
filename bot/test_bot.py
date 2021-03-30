@@ -1,6 +1,6 @@
 import unittest
 
-from bot import Bot
+from bot import Bot, DEFAULT
 
 
 class TestBot(unittest.TestCase):
@@ -10,4 +10,4 @@ class TestBot(unittest.TestCase):
 
     def test_bot(self):
         self.assertEqual(self.bot.ask("hi"), "Hey.")
-        self.assertEqual(self.bot.ask("sadfkljdfkjlhfd"), "Sorry, I don't get what you're saying, can you try again?")
+        self.assertIn(self.bot.ask("sadfkljdfkjlhfd"), DEFAULT)

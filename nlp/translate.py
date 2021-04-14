@@ -1,0 +1,43 @@
+import string
+
+import six
+
+from google.cloud import translate_v2 as translate
+
+
+class Translate:
+
+    @staticmethod
+    def translate_to_english(text):
+        return Translate.translate_text('en', text)
+
+    @staticmethod
+    def translate_text(target: string, text: string):
+        """Translates text into the target language. From Google Developer Quickstart Guide
+
+        Target must be an ISO 639-1 language code.
+        See https://g.co/cloud/translate/v2/translate-reference#supported_languages
+        """
+        translate_client = translate.Client()
+
+        if isinstance(text, six.binary_type):
+            text = text.decode("utf-8")
+
+        result = translate_client.translate(text, target_language=target)
+        result = dict(result)
+
+        Translate.log_translation(result)
+
+        # if the original language is the same as the target language then return the original string
+        # (to avoid modifying strings we already understand)
+        if result.get('detectedSourceLanguage', None) == target:
+            return text
+
+        # otherwise return the translated string
+        return result.get('translatedText', None)
+
+    @staticmethod
+    def log_translation(result: dict):
+        print(f"Translation | {result.get('input', None)} -> "
+              f"{result.get('translatedText', None)} | "
+              f"Source Lang: {result.get('detectedSourceLanguage', None)}")

@@ -12,6 +12,10 @@ class Translate:
         return Translate.translate_text('en', text)
 
     @staticmethod
+    def translate_to_lang(text, lang):
+        return Translate.translate_text(lang, text)
+
+    @staticmethod
     def translate_text(target: string, text: string):
         """Translates text into the target language. From Google Developer Quickstart Guide
 
@@ -30,14 +34,14 @@ class Translate:
 
         # if the original language is the same as the target language then return the original string
         # (to avoid modifying strings we already understand)
-        if result.get('detectedSourceLanguage', None) == target:
-            return text
+        if result.get('detectedSourceLanguage') == target:
+            return text, target
 
         # otherwise return the translated string
-        return result.get('translatedText', None)
+        return result.get('translatedText', None), result.get('detectedSourceLanguage', None)
 
     @staticmethod
     def log_translation(result: dict):
-        print(f"Translation | {result.get('input', None)} -> "
-              f"{result.get('translatedText', None)} | "
-              f"Source Lang: {result.get('detectedSourceLanguage', None)}")
+        print(f"Translation | {result.get('input')} -> "
+              f"{result.get('translatedText')} | "
+              f"Source Lang: {result.get('detectedSourceLanguage')}")

@@ -9,14 +9,14 @@ class Translate:
 
     @staticmethod
     def translate_to_english(text):
-        return Translate.translate_text('en', text)
+        return Translate.translate_text(text, 'en')
 
     @staticmethod
     def translate_to_lang(text, lang):
-        return Translate.translate_text(lang, text)
+        return Translate.translate_text(text, lang)
 
     @staticmethod
-    def translate_text(target: string, text: string):
+    def translate_text(text: string, target_lang: string):
         """Translates text into the target language. From Google Developer Quickstart Guide
 
         Target must be an ISO 639-1 language code.
@@ -27,15 +27,15 @@ class Translate:
         if isinstance(text, six.binary_type):
             text = text.decode("utf-8")
 
-        result = translate_client.translate(text, target_language=target)
+        result = translate_client.translate(text, target_language=target_lang)
         result = dict(result)
 
         Translate.log_translation(result)
 
         # if the original language is the same as the target language then return the original string
         # (to avoid modifying strings we already understand)
-        if result.get('detectedSourceLanguage') == target:
-            return text, target
+        if result.get('detectedSourceLanguage') == target_lang:
+            return text, target_lang
 
         # otherwise return the translated string
         return result.get('translatedText', None), result.get('detectedSourceLanguage', None)
